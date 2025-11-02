@@ -35,3 +35,29 @@ void RailVehicle::Draw()
 	shape->setPosition(CurrentTrack->Position + sf::Vector2f(PositionOnTrack, 0.0f));
 	Utils::GetWindow()->draw(*shape);
 }
+
+std::vector<RailVehicle*> RailVehicle::GetEntireTrain(bool includeOurself)
+{
+	std::vector<RailVehicle*> train;
+
+	// Add the left vehicles to the leftside of the train
+	RailVehicle* left = this->LeftCouple;
+	while (left != nullptr)
+	{
+		train.insert(train.begin(), left);
+		left = left->LeftCouple;
+	}
+
+	// If we wanna, then also include outself
+	if (includeOurself) train.push_back(this);
+
+	// Add the left vehicles to the rightside of the train
+	RailVehicle* right = this->RightCouple;
+	while (right != nullptr)
+	{
+		train.push_back(right);
+		right = right->RightCouple;
+	}
+
+	return train;
+}
