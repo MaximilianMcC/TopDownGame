@@ -21,22 +21,10 @@
     <ClCompile Include="utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="track.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="locomotive.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="railVehicle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="rollingStock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="trackHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="assetManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,22 +35,10 @@
     <ClInclude Include="numericalVectors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="track.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="locomotive.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="railVehicle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rollingStock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="trackHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="assetManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

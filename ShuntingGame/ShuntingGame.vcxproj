@@ -153,22 +153,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="assetManager.cpp" />
-    <ClCompile Include="locomotive.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="railVehicle.cpp" />
-    <ClCompile Include="rollingStock.cpp" />
-    <ClCompile Include="track.cpp" />
-    <ClCompile Include="trackHandler.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetManager.h" />
-    <ClInclude Include="locomotive.h" />
     <ClInclude Include="numericalVectors.h" />
-    <ClInclude Include="railVehicle.h" />
-    <ClInclude Include="rollingStock.h" />
-    <ClInclude Include="track.h" />
-    <ClInclude Include="trackHandler.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
