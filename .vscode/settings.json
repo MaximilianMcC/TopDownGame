@@ -34,6 +34,7 @@
 		"functional": "cpp",
 		"optional": "cpp",
 		"memory": "cpp",
-		"xtree": "cpp"
+		"xtree": "cpp",
+		"cmath": "cpp"
 	}
 }
