@@ -56,6 +56,11 @@ bool Utils::StringEndsWith(std::string string, std::string ending)
 	) == 0);
 }
 
+sf::Vector2f Utils::GetMousePosition()
+{
+	return window->mapPixelToCoords(sf::Mouse::getPosition(*window));
+}
+
 sf::Color Utils::GetRandomColor()
 {
 	// TODO: Seed it
