@@ -6,5 +6,8 @@
 class Level : public Scene
 {
 public:
-	sf::View Camera;
+	// void Begin() override;
+	// void Update() override;
+	// void Draw() override;
+	// void End() override;
 };

@@ -1,5 +1,7 @@
 #include "engine.h"
 
+#include "utils.h"
+
 Scene* SceneManager::currentScene = nullptr;
 
 void SceneManager::UnloadCurrentScene()
@@ -41,12 +43,16 @@ void SceneManager::Update()
 
 void SceneManager::Draw()
 {
-	// Draw everything
+	// Use the camera
+	Utils::GetWindow()->setView(currentScene->Camera);
+
+	// Draw everything automatically
 	for (size_t i = 0; i < currentScene->GameObjects.size(); i++)
 	{
 		currentScene->GameObjects[i]->Draw();
 	}
 
+	// Draw everything manually
 	currentScene->Draw();
 }
 

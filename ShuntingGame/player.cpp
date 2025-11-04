@@ -44,6 +44,9 @@ void Player::Update()
 {
 	Move();
 	Rotate();
+
+	// Make the camera follow the player
+	SceneManager::GetScene()->Camera.setCenter(body->GetPosition());
 }
 
 void Player::Draw()
