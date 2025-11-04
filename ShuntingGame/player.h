@@ -1,11 +1,12 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "sprite.h"
 
 class Player
 {
 private:
-	sf::RectangleShape body;
+	Sprite* body = nullptr;
 	float speed = 150.0f;
 
 	void Move();
@@ -14,4 +15,5 @@ public:
 	void Start();
 	void Update();
 	void Draw();
+	void CleanUp();
 };

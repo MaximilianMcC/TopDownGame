@@ -155,12 +155,14 @@
     <ClCompile Include="assetManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="sprite.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetManager.h" />
     <ClInclude Include="numericalVectors.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="sprite.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

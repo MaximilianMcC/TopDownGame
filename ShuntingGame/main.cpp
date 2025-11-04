@@ -40,5 +40,7 @@ int main()
 		window.display();
 	}
 
+	player.CleanUp();
+
 	return 0;
 }
