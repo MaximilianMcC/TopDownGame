@@ -1,13 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "engine.h"
 
-class Level
+class Level : public Scene
 {
 public:
 	sf::View Camera;
-
-	void Start();
-	void Update();
-	void Draw();
 };

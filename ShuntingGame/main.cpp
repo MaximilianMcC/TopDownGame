@@ -32,10 +32,14 @@ int main()
 			if (event->is<sf::Event::Closed>()) window.close();
 		}
 
+		SceneManager::Update();
+
 		// Draw
 		window.clear(sf::Color::Magenta);
+		SceneManager::Draw();
 		window.display();
 	}
 
+	SceneManager::CleanUp();
 	return 0;
 }

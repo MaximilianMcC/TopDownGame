@@ -2,8 +2,8 @@
 
 #include "utils.h"
 
-void Level::Draw()
-{
-	// Use the camera
-	Utils::GetWindow()->setView(Camera);
-}
+// void Level::Draw()
+// {
+// 	// Use the camera
+// 	Utils::GetWindow()->setView(Camera);
+// }
