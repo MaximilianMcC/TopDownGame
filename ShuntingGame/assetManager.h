@@ -31,21 +31,18 @@ static std::map<std::string, sf::Image> images;
 static std::map<std::string, sf::Font> fonts;
 
 public:
-	static void LoadTexture(std::string key, std::string path);
-	static void LoadTexture(std::string key, sf::Image& image);
-	static sf::Texture* LoadAndGetTexture(std::string key, std::string path);
+	static sf::Texture* LoadTexture(std::string key, std::string path);
+	static sf::Texture* LoadTexture(std::string key, sf::Image& image);
 	static sf::Texture* GetTexture(std::string key);
 	
-	static void LoadImage(std::string key, std::string path);
-	static sf::Image* LoadAndGetImage(std::string key, std::string path);
+	static sf::Image* LoadImage(std::string key, std::string path);
 	static sf::Image* GetImage(std::string key);
 
-	static void LoadDefaultFont(std::string key, std::string fontFileName);
+	static sf::Font* LoadDefaultFont(std::string key, std::string fontFileName);
 	static sf::Font* GetFont(std::string key);
 
-	static void LoadSound(std::string key, std::string path);
-	static sf::SoundBuffer* LoadAndGetSound(std::string key, std::string path);
+	static sf::SoundBuffer* LoadSound(std::string key, std::string path);
 	static sf::SoundBuffer* GetSound(std::string key);
 
-	static void LoadTextureFromRenderTexture(std::string key, sf::RenderTexture& renderTexture);
+	static sf::Texture* LoadTextureFromRenderTexture(std::string key, sf::RenderTexture& renderTexture);
 };
