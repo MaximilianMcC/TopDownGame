@@ -2,8 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 #include "sprite.h"
+#include "engine.h"
 
-class Player
+class Player : public GameObject
 {
 private:
 	Sprite* body = nullptr;
@@ -12,8 +13,8 @@ private:
 	void Move();
 	void Rotate();
 public:
-	void Start();
-	void Update();
-	void Draw();
-	void CleanUp();
+	void Start() override;
+	void Update() override;
+	void Draw() override;
+	void CleanUp() override;
 };

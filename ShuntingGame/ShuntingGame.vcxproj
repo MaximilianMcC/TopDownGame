@@ -153,16 +153,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="assetManager.cpp" />
+    <ClCompile Include="engine.cpp" />
+    <ClCompile Include="level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="sprite.cpp" />
+    <ClCompile Include="testScene.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetManager.h" />
+    <ClInclude Include="engine.h" />
+    <ClInclude Include="level.h" />
     <ClInclude Include="numericalVectors.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="sprite.h" />
+    <ClInclude Include="testScene.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

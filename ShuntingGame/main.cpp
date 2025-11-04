@@ -2,7 +2,8 @@
 #include "utils.h"
 #include "numericalVectors.h"
 #include "assetManager.h"
-#include "player.h"
+#include "engine.h"
+#include "testScene.h"
 
 int main()
 {
@@ -16,8 +17,7 @@ int main()
 	// Share the window so we can draw and whatnot
 	Utils::Init(&window);
 
-	Player player;
-	player.Start();
+	SceneManager::SetScene(new TestScene());
 
 	// Game window
 	while (window.isOpen())
@@ -32,15 +32,10 @@ int main()
 			if (event->is<sf::Event::Closed>()) window.close();
 		}
 
-		player.Update();
-
 		// Draw
 		window.clear(sf::Color::Magenta);
-		player.Draw();
 		window.display();
 	}
-
-	player.CleanUp();
 
 	return 0;
 }
