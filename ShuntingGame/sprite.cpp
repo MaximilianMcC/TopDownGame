@@ -47,7 +47,7 @@ void Sprite::SetPosition(sf::Vector2f newPosition)
 	// Loop over all sprites
 	for (size_t i = 0; i < layers.size(); i++)
 	{
-		layers[i].setPosition(position - sf::Vector2f(0, i * (layerSize.y + spacing)));
+		layers[i].setPosition(position - sf::Vector2f(0, (spacing * i)));
 	}
 }
 

@@ -37,7 +37,7 @@ void Player::Rotate()
 void Player::Start()
 {
 	// Create the actual body
-	body = new Sprite("./assets/box.png", 16, 0.0f);
+	body = new Sprite("./assets/box.png", 16, 0.8f);
 }
 
 void Player::Update()
