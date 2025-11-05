@@ -12,6 +12,7 @@ private:
 
 	void Move();
 	void Rotate();
+	void Shoot();
 public:
 	void Start() override;
 	void Update() override;

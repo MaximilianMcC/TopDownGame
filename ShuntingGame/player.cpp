@@ -3,6 +3,7 @@
 #include "assetManager.h"
 #include "utils.h"
 #include "numericalVectors.h"
+#include "projectile.h"
 
 void Player::Move()
 {
@@ -28,10 +29,21 @@ void Player::Rotate()
 	sf::Vector2f direction = Utils::GetMousePosition() - body->GetPosition();
 
 	// Turn the vector into an angle (sfml try not to overcomplicate everthing challenge)
-	sf::Angle angle = sf::radians(std::atan2(direction.y, direction.x));
+	sf::Angle angle = Utils::AngleFromVector(direction);
 
 	// Rotate the player accordingly
 	body->SetRotation(angle);
+}
+
+void Player::Shoot()
+{
+	// Check for if we click
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) == false) return;
+
+	// Spawn in a bullet
+	Projectile* bullet = new Projectile;
+	bullet->Init(body->GetPosition(), body->GetRotation());
+	SceneManager::GetScene()->AddGameObject(bullet);
 }
 
 void Player::Start()
@@ -44,6 +56,7 @@ void Player::Update()
 {
 	Move();
 	Rotate();
+	Shoot();
 
 	// Make the camera follow the player
 	SceneManager::GetScene()->Camera.setCenter(body->GetPosition());

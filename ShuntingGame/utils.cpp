@@ -61,6 +61,17 @@ sf::Vector2f Utils::GetMousePosition()
 	return window->mapPixelToCoords(sf::Mouse::getPosition(*window));
 }
 
+sf::Angle Utils::AngleFromVector(sf::Vector2f direction)
+{
+	return sf::radians(std::atan2(direction.y, direction.x));
+}
+
+sf::Vector2f Utils::VectorFromAngle(sf::Angle angle)
+{
+	float radians = angle.asRadians();
+	return sf::Vector2f(std::cos(radians), std::sin(radians));
+}
+
 sf::Color Utils::GetRandomColor()
 {
 	// TODO: Seed it

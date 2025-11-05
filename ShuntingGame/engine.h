@@ -23,7 +23,9 @@ public:
 	virtual void Draw() { }
 	virtual void End() { }
 
-	void AddGameObject(GameObject* gameObject);
+	// TODO: Put this in scene manager because its less typing
+	GameObject* AddGameObject(GameObject* gameObject);
+	void DestroyGameObject(GameObject* gameObject);
 };
 
 class SceneManager

@@ -9,9 +9,7 @@ void SceneManager::UnloadCurrentScene()
 	// Unload everything
 	for (size_t i = 0; i < currentScene->GameObjects.size(); i++)
 	{
-		currentScene->GameObjects[i]->CleanUp();
-		delete currentScene->GameObjects[i];
-		currentScene->GameObjects[i] = nullptr;
+		currentScene->DestroyGameObject(currentScene->GameObjects[i]);
 	}
 	
 	// Delete the scene
@@ -61,8 +59,27 @@ void SceneManager::CleanUp()
 	UnloadCurrentScene();
 }
 
-void Scene::AddGameObject(GameObject* gameObject)
+GameObject* Scene::AddGameObject(GameObject* gameObject)
 {
-	gameObject->Start();
+	// Add and start the game object
 	GameObjects.push_back(gameObject);
+	GameObjects.back()->Start();
+
+	// Give back the game object for
+	// if we wanna do anything with it
+	return GameObjects.back();
+}
+
+void Scene::DestroyGameObject(GameObject *gameObject)
+{
+	// Remove the game object from the list
+	GameObjects.erase(std::remove(
+		GameObjects.begin(),
+		GameObjects.end(),
+		gameObject
+	), GameObjects.end());
+
+	// Get rid of it
+	gameObject->CleanUp();
+	delete gameObject;
 }

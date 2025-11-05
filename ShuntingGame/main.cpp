@@ -8,7 +8,7 @@
 int main()
 {
 	// SFML setup
-	sf::RenderWindow window(sf::VideoMode({ 640, 480 }), "basic as");
+	sf::RenderWindow window(sf::VideoMode({ 640, 480 }), "mista beast; gimme som mone");
 	sf::Clock deltaTimeClock = sf::Clock();
 
 	// Load the debug font

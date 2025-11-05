@@ -24,5 +24,8 @@ public:
 
 	static sf::Vector2f GetMousePosition();
 
+	static sf::Angle AngleFromVector(sf::Vector2f direction);
+	static sf::Vector2f VectorFromAngle(sf::Angle angle);
+
 	static sf::Color GetRandomColor();
 };
