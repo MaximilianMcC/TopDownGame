@@ -42,6 +42,7 @@ void Player::Shoot()
 
 	// Spawn in a bullet
 	Projectile* bullet = new Projectile;
+	bullet->Start();
 	bullet->Init(body->GetPosition(), body->GetRotation());
 	SceneManager::GetScene()->AddGameObject(bullet);
 }

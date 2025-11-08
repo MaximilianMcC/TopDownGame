@@ -6,7 +6,8 @@
 void Projectile::Start()
 {
 	body = sf::RectangleShape();
-	body.setTexture(AssetManager::LoadTexture("bullet", "D:/test.png"), true);
+	body.setSize(sf::Vector2f(5.0f, 5.0f));
+	body.setTexture(AssetManager::LoadTexture("bullet", "D:/test.png"));
 }
 
 void Projectile::Update()
