@@ -9,12 +9,11 @@ Block::Block(sf::Vector2f position, int size, Direction movementDirection, bool 
 	direction = movementDirection;
 
 	// Create the block
-	const int blockSize = 16;
 	sf::Vector2f blockShape = (direction == SIDE_TO_SIDE) ? sf::Vector2f((float)size, 1) : sf::Vector2f(1, (float)size);
-	shape = sf::RectangleShape(blockShape * (float)blockSize);
+	shape = sf::RectangleShape(blockShape * (float)Level::BlockSize);
 
 	// Set its initial position on the board
-	position *= (float)blockSize;
+	position *= (float)Level::BlockSize;
 	shape.setPosition(position);
 
 	// Make it look nice

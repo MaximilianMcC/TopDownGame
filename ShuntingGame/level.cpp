@@ -8,11 +8,14 @@
 std::vector<Block*> Level::Blocks;
 int Level::Width = 0;
 int Level::Height = 0;
+const int Level::BlockSize = 16;
 
 void Level::Load(std::string path)
 {
 	// Clear any previous stuff
 	Blocks.clear();
+	Width = 0;
+	Height = 0;
 
 	// Open the level file
 	std::ifstream file(path);
@@ -83,11 +86,6 @@ void Level::Load(std::string path)
 		position.y++;
 	}
 	file.close();
-
-	// TODO: Load from file
-	Blocks.push_back(new Block(sf::Vector2f(0.0f, 1.0f), 2, SIDE_TO_SIDE));
-	Blocks.push_back(new Block(sf::Vector2f(2.0f, 3.0f), 3, UP_AND_DOWN, true));
-	Blocks.push_back(new Block(sf::Vector2f(3.0f, 1.0f), 2, SIDE_TO_SIDE));
 }
 
 void Level::Update()
