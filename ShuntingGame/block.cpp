@@ -9,7 +9,7 @@ Block::Block(sf::Vector2f position, int size, Direction movementDirection, bool 
 
 	// Create the block
 	const int blockSize = 16;
-	sf::Vector2f blockShape = (movementDirection == SIDE_TO_SIDE) ? sf::Vector2f(size, 1) : sf::Vector2f(1, size);
+	sf::Vector2f blockShape = (direction == SIDE_TO_SIDE) ? sf::Vector2f(size, 1) : sf::Vector2f(1, size);
 	shape = sf::RectangleShape(blockShape * (float)blockSize);
 
 	// Set its initial position on the board
@@ -34,6 +34,7 @@ void Block::Update()
 void Block::Move()
 {
 	//? cpp is such a crazy language bruh
+	// TODO: Move these to the method because this is so crook to have stuff in a method like this
 	static Block* blockBeingDragged = nullptr;
 	static sf::Vector2f dragOffset;
 
@@ -60,7 +61,15 @@ void Block::Move()
 	// Check for if we need to drag ourself
 	if (blockBeingDragged == this)
 	{
-		shape.setPosition(mousePosition + dragOffset);
+		// Only let us drag on a single axis
+		sf::Vector2f newPosition = shape.getPosition();
+
+		// TODO: Use vectors
+		if (direction == SIDE_TO_SIDE) newPosition.x = mousePosition.x + dragOffset.x;
+		else newPosition.y = mousePosition.y + dragOffset.y;
+
+		// Set the new position
+		shape.setPosition(newPosition);
 	}
 }
 
