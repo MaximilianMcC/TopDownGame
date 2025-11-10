@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include "numericalVectors.h"
 #include "utils.h"
 
 //? I hate cpp
@@ -9,6 +10,7 @@ std::vector<Block*> Level::Blocks;
 int Level::Width = 0;
 int Level::Height = 0;
 const int Level::BlockSize = 16;
+sf::RectangleShape Level::Border;
 
 void Level::Load(std::string path)
 {
@@ -86,6 +88,13 @@ void Level::Load(std::string path)
 		position.y++;
 	}
 	file.close();
+
+	// Make the fancy border based on the size of the thing
+	// TODO: DO COLLISION FOR THIS BY CHECKING FOR IF IT IS COLLIDING AND IF ITS NOT THEN DONT LET THEM MOVE YK
+	Border = sf::RectangleShape(sf::Vector2f((float)Width, (float)Height) * (float)BlockSize);
+	Border.setOutlineThickness(5.0f);
+	Border.setOutlineColor(sf::Color::White);
+	Border.setFillColor(sf::Color::Transparent);
 }
 
 void Level::Update()
@@ -99,11 +108,14 @@ void Level::Update()
 
 void Level::Draw()
 {
-	// Loop over all blocks and draw
+	// Loop over all blocks and draw them
 	for (size_t i = 0; i < Blocks.size(); i++)
 	{
 		Blocks[i]->Draw();
 	}
+
+	// draw the border
+	Utils::GetWindow()->draw(Border);
 }
 
 void Level::Unload()
