@@ -34,7 +34,7 @@ int main()
 		Level::Update();
 		
 		// Draw
-		window.clear(sf::Color::Magenta);
+		window.clear(sf::Color(0x778396));
 		window.setView(Utils::Camera);
 		Level::Draw();
 		window.display();
