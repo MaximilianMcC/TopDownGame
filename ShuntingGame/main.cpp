@@ -6,13 +6,13 @@
 int main()
 {
 	// SFML setup
-	sf::RenderWindow window(sf::VideoMode({ 640, 480 }), "In America they spell Pyjamas like Pajamas");
+	sf::RenderWindow window(sf::VideoMode({ 640, 480 }), "RP is literally the worlds best accent ever in the history of ever");
 	sf::Clock deltaTimeClock = sf::Clock();
 
 	// Share the window so we can draw and whatnot
 	Utils::Init(&window);
 
-	Level::Load();
+	Level::Load("./assets/levels/1.txt");
 
 	// Game window
 	while (window.isOpen())

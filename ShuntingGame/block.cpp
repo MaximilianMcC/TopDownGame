@@ -10,7 +10,7 @@ Block::Block(sf::Vector2f position, int size, Direction movementDirection, bool 
 
 	// Create the block
 	const int blockSize = 16;
-	sf::Vector2f blockShape = (direction == SIDE_TO_SIDE) ? sf::Vector2f(size, 1) : sf::Vector2f(1, size);
+	sf::Vector2f blockShape = (direction == SIDE_TO_SIDE) ? sf::Vector2f((float)size, 1) : sf::Vector2f(1, (float)size);
 	shape = sf::RectangleShape(blockShape * (float)blockSize);
 
 	// Set its initial position on the board

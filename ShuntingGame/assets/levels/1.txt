@@ -1,6 +1,6 @@
 6x6
-{u2}{s2}
-{u2k}
+{u2}{}{}{s2}
+{}{u2k}{}{}
 
 
 // s means sideways
