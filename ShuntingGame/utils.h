@@ -29,3 +29,9 @@ public:
 
 	static sf::Color GetRandomColor();
 };
+
+enum Direction
+{
+	UP_AND_DOWN,
+	SIDE_TO_SIDE
+};

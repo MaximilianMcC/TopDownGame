@@ -1,0 +1,8 @@
+6x6
+{u2}{s2}
+{u2k}
+
+
+// s means sideways
+// u means upwards
+// k means key (thing to escape)
