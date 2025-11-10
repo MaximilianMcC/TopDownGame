@@ -154,12 +154,14 @@
   <ItemGroup>
     <ClCompile Include="assetManager.cpp" />
     <ClCompile Include="block.cpp" />
+    <ClCompile Include="level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assetManager.h" />
     <ClInclude Include="block.h" />
+    <ClInclude Include="level.h" />
     <ClInclude Include="numericalVectors.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>

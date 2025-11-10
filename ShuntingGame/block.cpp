@@ -1,6 +1,7 @@
 #include "block.h"
 
 #include "numericalVectors.h"
+#include "level.h"
 
 Block::Block(sf::Vector2f position, int size, Direction movementDirection, bool key)
 {
@@ -61,15 +62,35 @@ void Block::Move()
 	// Check for if we need to drag ourself
 	if (blockBeingDragged == this)
 	{
-		// Only let us drag on a single axis
 		sf::Vector2f newPosition = shape.getPosition();
 
-		// TODO: Use vectors
+		// Only let us drag on a single axis
 		if (direction == SIDE_TO_SIDE) newPosition.x = mousePosition.x + dragOffset.x;
 		else newPosition.y = mousePosition.y + dragOffset.y;
 
-		// Set the new position
-		shape.setPosition(newPosition);
+		// Check for collision
+		// TODO: Put this in a method
+		bool collision = false;
+		for (Block* other : Level::Blocks)
+		{
+			// We cannot collide with ourself
+			if (other == this) continue;
+
+			// Get where we will be after moving
+			sf::FloatRect newBounds = shape.getGlobalBounds();
+        	newBounds.position = newPosition;
+
+			// Check for if we collide with a shape
+			if (newBounds.findIntersection(other->shape.getGlobalBounds()))
+			{
+				// TODO: Solve for collision instead of just stopping
+				collision = true;
+				break;
+			}
+		}
+		
+		// Set our new position if we didn't collide
+		if (collision == false) shape.setPosition(newPosition);
 	}
 }
 
