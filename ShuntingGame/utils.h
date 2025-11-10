@@ -21,6 +21,7 @@ public:
 
 	static std::vector<std::string> Split(std::string string, std::string delimiter);
 	static bool StringEndsWith(std::string string, std::string ending);
+	static void ReplaceAll(std::string& string, std::string thing, std::string with);
 
 	static sf::Vector2f GetMousePosition();
 

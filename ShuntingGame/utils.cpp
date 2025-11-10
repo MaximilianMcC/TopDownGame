@@ -56,6 +56,18 @@ bool Utils::StringEndsWith(std::string string, std::string ending)
 	) == 0);
 }
 
+// TODO: Rename these parameters because what is that bruh
+void Utils::ReplaceAll(std::string& string, std::string thing, std::string with)
+{
+	//? I lowk don't know how this works
+	size_t index = 0;
+	while ((index = string.find(thing, index)) != std::string::npos)
+	{
+		string.replace(index, thing.length(), with);
+		index += with.length();
+	}
+}
+
 sf::Vector2f Utils::GetMousePosition()
 {
 	return window->mapPixelToCoords(sf::Mouse::getPosition(*window));
