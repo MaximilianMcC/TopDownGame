@@ -8,6 +8,7 @@ class Block
 private:
 	bool isKey = false;
 	Direction direction;
+	sf::RectangleShape shape;
 
 public:
 	Block(sf::Vector2f position, int blockSize, Direction movementDirection, bool key = false);

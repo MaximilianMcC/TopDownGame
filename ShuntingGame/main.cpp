@@ -1,23 +1,25 @@
 #include <SFML/Graphics.hpp>
 #include "utils.h"
-#include "numericalVectors.h"
 #include "assetManager.h"
-#include "engine.h"
-#include "testScene.h"
+#include "block.h"
 
 int main()
 {
 	// SFML setup
-	sf::RenderWindow window(sf::VideoMode({ 640, 480 }), "mista beast; gimme som mone");
+	sf::RenderWindow window(sf::VideoMode({ 640, 480 }), "In America they spell Pyjamas like Pajamas");
 	sf::Clock deltaTimeClock = sf::Clock();
 
 	// Load the debug font
-	AssetManager::LoadDefaultFont("debug", "consola");
+	//AssetManager::LoadDefaultFont("debug", "consola");
 
 	// Share the window so we can draw and whatnot
 	Utils::Init(&window);
 
-	SceneManager::SetScene(new TestScene());
+
+	//! debug
+	Block* block1 = new Block(sf::Vector2f(1.0f, 1.0f), 2, SIDE_TO_SIDE);
+	Block* block2 = new Block(sf::Vector2f(2.0f, 3.0f), 3, SIDE_TO_SIDE, true);
+
 
 	// Game window
 	while (window.isOpen())
@@ -32,14 +34,16 @@ int main()
 			if (event->is<sf::Event::Closed>()) window.close();
 		}
 
-		SceneManager::Update();
-
+		
 		// Draw
 		window.clear(sf::Color::Magenta);
-		SceneManager::Draw();
+		block1->Draw();
+		block2->Draw();
 		window.display();
 	}
 
-	SceneManager::CleanUp();
+	delete block1;
+	delete block2;
+
 	return 0;
 }
