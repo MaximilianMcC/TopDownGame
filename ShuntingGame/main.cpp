@@ -14,6 +14,9 @@ int main()
 
 	Level::Load("./assets/levels/1.txt");
 
+	// Zoom in the camera a little
+	Utils::Camera.zoom(1.0f / 3.0f);
+
 	// Game window
 	while (window.isOpen())
 	{
@@ -29,9 +32,10 @@ int main()
 		
 		// Update
 		Level::Update();
-
+		
 		// Draw
 		window.clear(sf::Color::Magenta);
+		window.setView(Utils::Camera);
 		Level::Draw();
 		window.display();
 	}

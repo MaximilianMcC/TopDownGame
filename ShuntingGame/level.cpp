@@ -95,6 +95,9 @@ void Level::Load(std::string path)
 	Border.setOutlineThickness(5.0f);
 	Border.setOutlineColor(sf::Color::White);
 	Border.setFillColor(sf::Color::Transparent);
+
+	// Centre the camera on the level
+	Utils::Camera.setCenter(Border.getGeometricCenter());
 }
 
 void Level::Update()

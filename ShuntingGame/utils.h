@@ -11,10 +11,13 @@ private:
 	
 public:
 	static float DeltaTime;
+	static sf::View Camera;
 
 	static void Init(sf::RenderWindow* mainWindow)
 	{
+		// Assign the window and set the camera
 		window = mainWindow;
+		Camera = sf::View();
 	}
 
 	static sf::RenderWindow* GetWindow() { return window; }

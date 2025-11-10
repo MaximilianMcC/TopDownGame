@@ -86,6 +86,15 @@ void Block::Move()
 				collision = true;
 				break;
 			}
+
+			// Check for if we will collide with the border
+			//? we are actually checking for if it 'uncollides' since we want it inside the border yk
+			if (!newBounds.findIntersection(Level::Border.getLocalBounds()))
+			{
+				// TODO: Solve for collision instead of just stopping
+				collision = true;
+				break;
+			}
 		}
 		
 		// Set our new position if we didn't collide

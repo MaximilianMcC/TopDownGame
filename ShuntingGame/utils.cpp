@@ -4,6 +4,7 @@
 // Register private static stuff
 sf::RenderWindow* Utils::window;
 float Utils::DeltaTime;
+sf::View Utils::Camera;
 
 std::vector<std::string> Utils::Split(std::string string, std::string delimiter)
 {
