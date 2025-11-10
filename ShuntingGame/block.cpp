@@ -9,7 +9,7 @@ Block::Block(sf::Vector2f position, int size, Direction movementDirection, bool 
 
 	// Create the block
 	const int blockSize = 16;
-	sf::Vector2f blockShape = (movementDirection == SIDE_TO_SIDE) ? sf::Vector2f(1, size) : sf::Vector2f(size, 1);
+	sf::Vector2f blockShape = (movementDirection == SIDE_TO_SIDE) ? sf::Vector2f(size, 1) : sf::Vector2f(1, size);
 	shape = sf::RectangleShape(blockShape * (float)blockSize);
 
 	// Set its initial position on the board
@@ -33,6 +33,35 @@ void Block::Update()
 
 void Block::Move()
 {
+	//? cpp is such a crazy language bruh
+	static Block* blockBeingDragged = nullptr;
+	static sf::Vector2f dragOffset;
+
+	// Check for if we're clicking
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) == false)
+	{
+		// We are no-longer dragging a block
+		blockBeingDragged = nullptr;
+		return;
+	}
+
+	// Check for if we're clicking on ourself (begin draw)
+	sf::Vector2f mousePosition = Utils::GetMousePosition();
+	if (blockBeingDragged == nullptr && shape.getGlobalBounds().contains(mousePosition))
+	{
+		// We are now dragging a block
+		blockBeingDragged = this;
+
+		// Get the local position of the mouse relative
+		// to the block so we don't drag from (0, 0)
+		dragOffset = shape.getPosition() - mousePosition;
+	}
+
+	// Check for if we need to drag ourself
+	if (blockBeingDragged == this)
+	{
+		shape.setPosition(mousePosition + dragOffset);
+	}
 }
 
 void Block::Draw()

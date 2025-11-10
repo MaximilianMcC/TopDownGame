@@ -18,7 +18,7 @@ int main()
 
 	//! debug
 	Block* block1 = new Block(sf::Vector2f(1.0f, 1.0f), 2, SIDE_TO_SIDE);
-	Block* block2 = new Block(sf::Vector2f(2.0f, 3.0f), 3, SIDE_TO_SIDE, true);
+	Block* block2 = new Block(sf::Vector2f(2.0f, 3.0f), 3, UP_AND_DOWN, true);
 
 
 	// Game window
@@ -34,6 +34,8 @@ int main()
 			if (event->is<sf::Event::Closed>()) window.close();
 		}
 
+		block1->Update();
+		block2->Update();
 		
 		// Draw
 		window.clear(sf::Color::Magenta);
