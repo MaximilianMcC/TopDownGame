@@ -19,7 +19,7 @@ void ConfigManager::Init()
 	// Get the path to the config file
 	configFilePath = std::string(appDataPath) + "\\PuzzleGame\\config.ini";
 	std::filesystem::create_directories(std::string(appDataPath) + "\\PuzzleGame");
-	std::cout << configFilePath << std::endl;
+	// std::cout << configFilePath << std::endl;
 
 	// If the file doesn't already exist then create
 	// and populate it with some default data

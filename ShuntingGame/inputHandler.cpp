@@ -4,18 +4,34 @@
 
 std::unordered_map<sf::Keyboard::Key, bool> InputHandler::previousKeyStates;
 
+bool InputHandler::KeyPreviosulyPressed(sf::Keyboard::Key key)
+{
+	// Loop over all previous keys
+	std::unordered_map<sf::Keyboard::Key, bool>::iterator iterator;
+	iterator = previousKeyStates.find(key);
+
+	// Check for if the key exists
+	if (iterator != previousKeyStates.end())
+	{
+		// Get its state
+		return iterator->second;
+	}
+
+	return false;
+}
+
 bool InputHandler::KeyPressed(sf::Keyboard::Key key)
 {
-	// Check for if the key state has changed since we last checked
-	bool pressed = sf::Keyboard::isKeyPressed(key);
-	bool previouslyPressed = previousKeyStates[key];
+	// Check for if its pressed
+	bool downRn = sf::Keyboard::isKeyPressed(key);
+	bool previouslyDown = KeyPreviosulyPressed(key);
 
-	// Update the keys new state
-	previousKeyStates[key] = pressed;
+	// Update the stored state
+	previousKeyStates[key] = downRn;
 
-	// For it to be pressed it must not
-	// have been previously pressed
-	return (pressed && (previouslyPressed == false));
+	// To be pressed then it needs to
+	// not have been previously pressed
+	return (downRn && (previouslyDown == false));
 }
 
 bool InputHandler::KeyHeldDown(sf::Keyboard::Key key)
@@ -35,14 +51,4 @@ bool InputHandler::KeyHeldDown(sf::Keyboard::Key key)
 sf::Vector2f InputHandler::GetMousePosition()
 {
 	return Utils::GetWindow()->mapPixelToCoords(sf::Mouse::getPosition(*Utils::GetWindow()));
-}
-
-void InputHandler::CaptureInputs()
-{
-	// Loop over all keys and check for they are pressed or not
-	//? Must use auto for a for loop like this in cpp
-	for (auto& [key, _] : previousKeyStates)
-	{
-		previousKeyStates[key] = sf::Keyboard::isKeyPressed(key);
-	}
 }

@@ -1,6 +1,7 @@
 #include "block.h"
 
 #include "numericalVectors.h"
+#include "inputHandler.h"
 #include "level.h"
 
 Block::Block(sf::Vector2f position, int size, Direction movementDirection, bool key)
@@ -45,7 +46,7 @@ void Block::Move()
 	}
 
 	// Check for if we're clicking on ourself (begin drag)
-	sf::Vector2f mousePosition = Utils::GetMousePosition();
+	sf::Vector2f mousePosition = InputHandler::GetMousePosition();
 	if (blockBeingDragged == nullptr && shape.getGlobalBounds().contains(mousePosition))
 	{
 		// We are now dragging a block

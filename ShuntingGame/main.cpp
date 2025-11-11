@@ -29,7 +29,6 @@ int main()
 		// Calculate and update delta time
 		// and update the inputs
 		Utils::DeltaTime = deltaTimeClock.restart().asSeconds();
-		InputHandler::CaptureInputs();
 
 		// Check for any events
 		while (const std::optional event = window.pollEvent())
@@ -49,6 +48,8 @@ int main()
 		// Update
 		Level::Update();
 		
+		if (InputHandler::KeyPressed(sf::Keyboard::Key::Space)) printf("hi\n");
+
 		// Draw
 		window.clear(sf::Color(0x778396));
 		window.setView(Utils::Camera);
