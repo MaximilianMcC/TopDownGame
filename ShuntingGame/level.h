@@ -25,4 +25,6 @@ public:
 	static void Update();
 	static void Draw();
 	static void Unload();
+
+	static void GotoNextLevel();
 };

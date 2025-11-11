@@ -149,3 +149,8 @@ void Level::Unload()
 
 	delete levelNameText;
 }
+
+void Level::GotoNextLevel()
+{
+	Load(Level::NextLevelPath);
+}
