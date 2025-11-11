@@ -19,8 +19,6 @@ Block::Block(sf::Vector2f position, int size, Direction movementDirection, bool 
 	// Make it look nice
 	// TODO: Use textures
 	shape.setFillColor(Utils::GetRandomColor());
-	shape.setOutlineThickness(2.0f);
-	shape.setOutlineColor(sf::Color::Black);
 
 	// If its the key then give it the special apperance
 	if (isKey) shape.setFillColor(sf::Color::Red);
@@ -46,7 +44,7 @@ void Block::Move()
 		return;
 	}
 
-	// Check for if we're clicking on ourself (begin draw)
+	// Check for if we're clicking on ourself (begin drag)
 	sf::Vector2f mousePosition = Utils::GetMousePosition();
 	if (blockBeingDragged == nullptr && shape.getGlobalBounds().contains(mousePosition))
 	{
@@ -58,51 +56,174 @@ void Block::Move()
 		dragOffset = shape.getPosition() - mousePosition;
 	}
 
-	// Check for if we need to drag ourself
+	// If we're being dragged then do collision detection
 	if (blockBeingDragged == this)
 	{
-		sf::Vector2f newPosition = shape.getPosition();
+		// Collision detection setup stuff idk
+		sf::FloatRect bounds = shape.getGlobalBounds();
+		sf::FloatRect targetBounds = bounds;
+		sf::Vector2f currentPosition = bounds.position;
+		sf::Vector2f targetPosition = currentPosition;
 
-		// Only let us drag on a single axis
-		if (direction == SIDE_TO_SIDE) newPosition.x = mousePosition.x + dragOffset.x;
-		else newPosition.y = mousePosition.y + dragOffset.y;
+		// Shorthands because we're gonna be using these heaps
+		float width = bounds.size.x;
+		float height = bounds.size.y;
 
-		// Check for collision
+		// Say where we want to go (based on how much the mouse moves)
+		if (direction == SIDE_TO_SIDE) targetPosition.x = mousePosition.x + dragOffset.x;
+		else targetPosition.y = mousePosition.y + dragOffset.y;
+
+		// Do border collision
 		// TODO: Put this in a method
-		bool collision = false;
-		for (Block* other : Level::Blocks)
 		{
-			// We cannot collide with ourself
-			if (other == this) continue;
+			// Get the boarder
+			const sf::FloatRect& border = Level::Border.getGlobalBounds();
 
-			// Get where we will be after moving
-			sf::FloatRect newBounds = shape.getGlobalBounds();
-        	newBounds.position = newPosition;
-
-			// Check for if we collide with a shape
-			if (newBounds.findIntersection(other->shape.getGlobalBounds()))
+			if (direction == SIDE_TO_SIDE)
 			{
-				// TODO: Solve for collision instead of just stopping
-				collision = true;
-				break;
-			}
+				// Get how much we're allowed to move
+				float minX = border.position.x;
+				float maxX = border.position.x + border.size.x - width;
 
-			// Check for if we will collide with the border
-			//? we are actually checking for if it 'uncollides' since we want it inside the border yk
-			if (!newBounds.findIntersection(Level::Border.getLocalBounds()))
+				// make sure we can't go outside the bounds
+				targetPosition.x = std::clamp(targetPosition.x, minX, maxX);
+				targetBounds.position.x = targetPosition.x;
+			} else
 			{
-				// TODO: Solve for collision instead of just stopping
-				collision = true;
-				break;
+				// Get how much we're allowed to move
+				float minY = border.position.y;
+				float maxY = border.position.y + border.size.y - height;
+
+				// make sure we can't go outside the bounds
+				targetPosition.y = std::clamp(targetPosition.y, minY, maxY);
+				targetBounds.position.y = targetPosition.y;
 			}
 		}
-		
-		// Set our new position if we didn't collide
-		if (collision == false) shape.setPosition(newPosition);
+
+		// Do block collision
+		// TODO: Put this in a method
+		{
+			// Check for X collision
+			if (direction == SIDE_TO_SIDE)
+			{
+				bool movingRight = targetPosition.x > currentPosition.x;
+				float allowedX = targetPosition.x;
+				
+				float currentLeft = currentPosition.x;
+        		float currentRight = currentPosition.x + width;
+
+				// Loop over all blocks
+				for (Block* other : Level::Blocks)
+				{
+					// We cannot collide with ourself
+					if (other == this) continue;
+
+					// Check for if we collide
+					sf::FloatRect otherBounds = other->shape.getGlobalBounds();
+            		if (OverlapsOnY(targetBounds, otherBounds) == false) continue;
+
+					// Figure out where we're allowed to go
+					float otherLeft = otherBounds.position.x;
+            		float otherRight = otherBounds.position.x + otherBounds.size.x;
+
+					// If we're 'overflowing' then adjust
+					if (movingRight)
+					{
+						// Left stuff
+						float limitX = otherLeft - width;
+						if (limitX < allowedX && currentRight <= otherLeft) allowedX = limitX;
+					}
+					else
+					{
+						// Right stuff
+						float limitX = otherRight;
+						if (limitX > allowedX && currentLeft >= otherRight) allowedX = limitX;
+					}
+				}
+
+				// Set the new adjusted X position
+				targetPosition.x = allowedX;
+			}
+			else
+			{
+				// Y collision
+				bool movingDown = targetPosition.y > currentPosition.y;
+        		float allowedY = targetPosition.y;
+
+        		float currentTop = currentPosition.y;
+        		float currentBottom = currentPosition.y + height;
+				
+				// Loop over all blocks
+				for (Block* other : Level::Blocks) {
+
+					// We cannot collide with ourself
+					if (other == this) continue;
+					
+					// Check for if we collide
+					sf::FloatRect otherBounds = other->shape.getGlobalBounds();
+					if (OverlapsOnX(targetBounds, otherBounds) == false) continue;
+					
+					// Figure out where we're allowed to go
+					float otherTop = otherBounds.position.y;
+					float otherBottom = otherBounds.position.y + otherBounds.size.y;
+					
+					// If we're 'overflowing' then adjust
+					if (movingDown)
+					{
+						// Top stuff
+						float limitY = otherTop - height;
+						if (limitY < allowedY && currentBottom <= otherTop) allowedY = limitY;
+					}
+					else
+					{
+						// Bottom stuff
+						float limitY = otherBottom;
+						if (limitY > allowedY && currentTop >= otherBottom) allowedY = limitY;
+					}
+				}
+
+				// Set the new adjusted Y position
+				targetPosition.y = allowedY;
+			}
+
+			// Actually move now that we've changed
+			// both the X/Y things
+			shape.setPosition(targetPosition);
+		}
 	}
 }
 
 void Block::Draw()
 {
 	Utils::GetWindow()->draw(shape);
+}
+
+
+
+bool Block::OverlapsOnY(const sf::FloatRect& a, const sf::FloatRect& b)
+{
+	// Handle A
+    const float aTop = a.position.y;
+    const float aBottom = a.position.y + a.size.y;
+
+	// Handle B
+    const float bTop = b.position.y;
+    const float bBottom = b.position.y + b.size.y;
+
+	// Do the actual check
+    return (aTop < bBottom) && (aBottom > bTop);
+}
+
+bool Block::OverlapsOnX(const sf::FloatRect& a, const sf::FloatRect& b)
+{
+	// Handle A
+    const float aLeft = a.position.x;
+    const float aRight = a.position.x + a.size.x;
+
+	// Handle B
+    const float bLeft = b.position.x;
+    const float bRight = b.position.x + b.size.x;
+
+	// Do the actual check
+    return (aLeft < bRight) && (aRight > bLeft);
 }

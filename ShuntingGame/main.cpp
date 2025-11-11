@@ -6,7 +6,7 @@
 int main()
 {
 	// SFML setup
-	sf::RenderWindow window(sf::VideoMode({ 640, 480 }), "RP is literally the worlds best accent ever in the history of ever");
+	sf::RenderWindow window(sf::VideoMode({ 640, 480 }), "graphics and oop do not mix");
 	sf::Clock deltaTimeClock = sf::Clock();
 
 	// Share the window so we can draw and whatnot
