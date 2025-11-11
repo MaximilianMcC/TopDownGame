@@ -155,6 +155,7 @@
     <ClCompile Include="assetManager.cpp" />
     <ClCompile Include="block.cpp" />
     <ClCompile Include="configManager.cpp" />
+    <ClCompile Include="debugger.cpp" />
     <ClCompile Include="inputHandler.cpp" />
     <ClCompile Include="level.cpp" />
     <ClCompile Include="main.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="assetManager.h" />
     <ClInclude Include="block.h" />
     <ClInclude Include="configManager.h" />
+    <ClInclude Include="debugger.h" />
     <ClInclude Include="inputHandler.h" />
     <ClInclude Include="level.h" />
     <ClInclude Include="numericalVectors.h" />

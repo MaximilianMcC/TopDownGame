@@ -3,7 +3,7 @@
 #include "assetManager.h"
 #include "level.h"
 #include "configManager.h"
-#include "inputHandler.h"
+#include "debugger.h"
 
 int main()
 {
@@ -11,13 +11,16 @@ int main()
 	sf::RenderWindow window(sf::VideoMode({ 640, 480 }), "graphics and oop do not mix");
 	sf::Clock deltaTimeClock = sf::Clock();
 
-	// Share the window so we can draw and whatnot
-	Utils::Init(&window);
-
-	// Config setup
-	ConfigManager::Init();
-
+	// Load random assets
 	AssetManager::LoadDefaultFont("arial", "ARIAL");
+	AssetManager::LoadDefaultFont("consolas", "consola");
+
+	// Window kinda setup
+	Utils::Init(&window);
+	ConfigManager::Init();
+	Debugger::Start();
+
+	// Load the level
 	Level::Load(ConfigManager::GetString("level"));
 
 	// Zoom in the camera a little
@@ -27,8 +30,9 @@ int main()
 	while (window.isOpen())
 	{
 		// Calculate and update delta time
-		// and update the inputs
+		// and do the debug stuff
 		Utils::DeltaTime = deltaTimeClock.restart().asSeconds();
+		Debugger::Update();
 
 		// Check for any events
 		while (const std::optional event = window.pollEvent())
@@ -48,16 +52,16 @@ int main()
 		// Update
 		Level::Update();
 		
-		if (InputHandler::KeyPressed(sf::Keyboard::Key::Space)) printf("hi\n");
-
 		// Draw
 		window.clear(sf::Color(0x778396));
 		window.setView(Utils::Camera);
 		Level::Draw();
+		Debugger::Draw();
 		window.display();
 	}
 
 	Level::Unload();
+	Debugger::CleanUp();
 
 	return 0;
 }
