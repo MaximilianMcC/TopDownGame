@@ -41,7 +41,7 @@ void ConfigManager::Init()
 			(unsigned int)GetInt("windowX"),
 			(unsigned int)GetInt("windowY")
 		));
-		Utils::GetWindow()->setVerticalSyncEnabled(GetBoolean("vsync"));
+		Utils::UseVsync(GetBoolean("vsync"));
 	}
 }
 

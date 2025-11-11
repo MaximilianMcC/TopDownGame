@@ -8,6 +8,7 @@ class Utils
 {
 private:
 	static sf::RenderWindow* window;
+	static bool vsync;
 	
 public:
 	static float DeltaTime;
@@ -21,6 +22,8 @@ public:
 	}
 
 	static sf::RenderWindow* GetWindow() { return window; }
+	static void UseVsync(bool state);
+	static bool VsyncOn();
 
 	static std::vector<std::string> Split(std::string string, std::string delimiter);
 	static bool StringEndsWith(std::string string, std::string ending);

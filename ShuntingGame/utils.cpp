@@ -1,10 +1,26 @@
 #include "utils.h"
 #include <cstdlib>
+#include "configManager.h"
 
 // Register private static stuff
 sf::RenderWindow* Utils::window;
+bool Utils::vsync;
+
+// Register public static stuff
 float Utils::DeltaTime;
 sf::View Utils::Camera;
+
+void Utils::UseVsync(bool state)
+{
+	vsync = state;
+	window->setVerticalSyncEnabled(vsync);
+	ConfigManager::SetBoolean("vsync", vsync);
+}
+
+bool Utils::VsyncOn()
+{
+	return vsync;
+}
 
 std::vector<std::string> Utils::Split(std::string string, std::string delimiter)
 {
