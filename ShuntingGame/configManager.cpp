@@ -27,12 +27,21 @@ void ConfigManager::Init()
 	{
 		SetString("level", "./assets/levels/level1.txt");
 		SetBoolean("vsync", false);
-		// Set("windowX", (int)Utils::GetWindow()->getSize().x);
-		// Set("windowY", (int)Utils::GetWindow()->getSize().y);
+		SetInt("windowX", (int)Utils::GetWindow()->getSize().x);
+		SetInt("windowY", (int)Utils::GetWindow()->getSize().y);
 
 		// TODO: Add volume
 		// TODO: Add a float datatype (or just `* 100` or whatever)
 		// Set("volume", 30);
+	}
+	else
+	{
+		// 'Apply' everything that has been saved
+		Utils::GetWindow()->setSize(sf::Vector2u(
+			(unsigned int)GetInt("windowX"),
+			(unsigned int)GetInt("windowY")
+		));
+		Utils::GetWindow()->setVerticalSyncEnabled(GetBoolean("vsync"));
 	}
 }
 
@@ -121,4 +130,15 @@ std::string ConfigManager::GetString(std::string key)
 	// Couldn't find it
 	std::cerr << "No key of the name '" << key << "' found.\n";
 	return "idk";
+}
+
+int ConfigManager::GetInt(std::string key)
+{
+	return std::stoi(GetString(key));
+}
+
+bool ConfigManager::GetBoolean(std::string key)
+{
+	// Don't do this because this is just weird as
+	return GetInt(key);
 }

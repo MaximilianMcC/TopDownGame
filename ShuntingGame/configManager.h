@@ -17,6 +17,6 @@ public:
 
 	// TODO: Use generics isntead of doing this
 	static std::string GetString(std::string key);
-	static int GetInt(std::string key) {};
-	static bool GetBoolean(std::string key) {};
+	static int GetInt(std::string key);
+	static bool GetBoolean(std::string key);
 };

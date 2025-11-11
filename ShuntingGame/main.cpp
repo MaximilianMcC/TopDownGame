@@ -10,11 +10,11 @@ int main()
 	sf::RenderWindow window(sf::VideoMode({ 640, 480 }), "graphics and oop do not mix");
 	sf::Clock deltaTimeClock = sf::Clock();
 
-	// Config setup
-	ConfigManager::Init();
-
 	// Share the window so we can draw and whatnot
 	Utils::Init(&window);
+
+	// Config setup
+	ConfigManager::Init();
 
 	AssetManager::LoadDefaultFont("arial", "ARIAL");
 	Level::Load(ConfigManager::GetString("level"));
@@ -33,6 +33,14 @@ int main()
 		{
 			// Check for if we wanna close the window
 			if (event->is<sf::Event::Closed>()) window.close();
+
+			// Check for if we resize the window
+			if (event->is<sf::Event::Resized>())
+			{
+				// Update the size in the config
+				ConfigManager::SetInt("windowX", (int)window.getSize().x);
+				ConfigManager::SetInt("windowY", (int)window.getSize().y);
+			}
 		}
 		
 		// Update
