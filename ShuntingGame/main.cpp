@@ -12,6 +12,7 @@ int main()
 	// Share the window so we can draw and whatnot
 	Utils::Init(&window);
 
+	AssetManager::LoadDefaultFont("arial", "ARIAL");
 	Level::Load("./assets/levels/1.txt");
 
 	// Zoom in the camera a little

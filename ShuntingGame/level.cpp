@@ -4,13 +4,17 @@
 #include <fstream>
 #include "numericalVectors.h"
 #include "utils.h"
+#include "assetManager.h"
 
 //? I hate cpp
 std::vector<Block*> Level::Blocks;
 int Level::Width = 0;
 int Level::Height = 0;
+std::string Level::Name = "unknown";
 const int Level::BlockSize = 16;
+
 sf::RectangleShape Level::Border;
+sf::Text* Level::levelNameText = nullptr;
 
 void Level::Load(std::string path)
 {
@@ -29,19 +33,20 @@ void Level::Load(std::string path)
 
 	// Loop over every line in the file
 	std::string line;
-	bool gotSize = false;
+	bool gotHeader = false;
 	sf::Vector2f position;
 	while (std::getline(file, line))
 	{
-		// The first line is the maps size
-		if (gotSize == false)
+		// The first line is the maps size + name
+		if (gotHeader == false)
 		{
-			// Extract the width and height automatically
-			std::vector<std::string> data = Utils::Split(line, "x");
+			// Extract the size and name
+			std::vector<std::string> data = Utils::Split(line, ",");
 			Width = std::stoi(data[0]);
 			Height = std::stoi(data[1]);
+			Name = data[2];
 
-			gotSize = true;
+			gotHeader = true;
 			continue;
 		}
 
@@ -96,6 +101,11 @@ void Level::Load(std::string path)
 	Border.setOutlineColor(sf::Color::White);
 	Border.setFillColor(sf::Color::Transparent);
 
+	// Set the text
+	levelNameText = new sf::Text(*AssetManager::GetFont("arial"), Name, 40U);
+	levelNameText->setOrigin(levelNameText->getLocalBounds().size / 2.0f);
+	levelNameText->setPosition(Border.getGeometricCenter() * sf::Vector2f(1.0f, -1.5f));
+
 	// Centre the camera on the level
 	Utils::Camera.setCenter(Border.getGeometricCenter());
 }
@@ -117,8 +127,9 @@ void Level::Draw()
 		Blocks[i]->Draw();
 	}
 
-	// draw the border
+	// draw the border and level name
 	Utils::GetWindow()->draw(Border);
+	Utils::GetWindow()->draw(*levelNameText);
 }
 
 void Level::Unload()
@@ -129,4 +140,6 @@ void Level::Unload()
 		Blocks[i] = nullptr;
 	}
 	Blocks.clear();
+
+	delete levelNameText;
 }
