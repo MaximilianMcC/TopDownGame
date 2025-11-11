@@ -11,9 +11,9 @@ public:
 	static void Init();
 
 	// TODO: Use generics isntead of doing this
-	static void Set(std::string key, std::string value);
-	// static void Set(std::string key, int value) {};
-	// static void Set(std::string key, bool value) {};
+	static void SetString(std::string key, std::string value);
+	static void SetInt(std::string key, int value);
+	static void SetBoolean(std::string key, bool value);
 
 	// TODO: Use generics isntead of doing this
 	static std::string GetString(std::string key);

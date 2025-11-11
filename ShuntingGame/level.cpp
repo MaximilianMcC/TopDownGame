@@ -5,6 +5,7 @@
 #include "numericalVectors.h"
 #include "utils.h"
 #include "assetManager.h"
+#include "configManager.h"
 
 //? I hate cpp
 std::vector<Block*> Level::Blocks;
@@ -27,7 +28,7 @@ void Level::Load(std::string path)
 	std::ifstream file(path);
 	if (!file)
 	{
-		std::cerr << "issue loading level at " << path << "\n";
+		std::cerr << "issue loading level at path '" << path << "'\n";
 		return;
 	}
 
@@ -107,6 +108,9 @@ void Level::Load(std::string path)
 
 	// Centre the camera on the level
 	Utils::Camera.setCenter(Border.getGeometricCenter());
+
+	// Update the config file
+	ConfigManager::SetString("level", path);
 }
 
 void Level::Update()

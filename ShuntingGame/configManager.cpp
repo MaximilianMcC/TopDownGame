@@ -17,16 +17,16 @@ void ConfigManager::Init()
 	SHGetFolderPathA(nullptr, CSIDL_LOCAL_APPDATA, nullptr, 0, appDataPath);
 
 	// Get the path to the config file
-	configFilePath = std::string(appDataPath) + "/PuzzleGame/config.ini";
-	std::filesystem::create_directories(std::string(appDataPath) + "/PuzzleGame");
+	configFilePath = std::string(appDataPath) + "\\PuzzleGame\\config.ini";
+	std::filesystem::create_directories(std::string(appDataPath) + "\\PuzzleGame");
+	std::cout << configFilePath << std::endl;
 
 	// If the file doesn't already exist then create
 	// and populate it with some default data
 	if (std::filesystem::exists(configFilePath) == false)
 	{
-		Set("level", "level1");
-
-		// Set("vsync", false);
+		SetString("level", "./assets/levels/level1.txt");
+		SetBoolean("vsync", false);
 		// Set("windowX", (int)Utils::GetWindow()->getSize().x);
 		// Set("windowY", (int)Utils::GetWindow()->getSize().y);
 
@@ -37,7 +37,7 @@ void ConfigManager::Init()
 }
 
 //! overwrites file rn
-void ConfigManager::Set(std::string key, std::string value)
+void ConfigManager::SetString(std::string key, std::string value)
 {
 	// Get what our new line will be and save
 	// watever was previously in the file
@@ -80,6 +80,16 @@ void ConfigManager::Set(std::string key, std::string value)
 		updatedConfig << line << std::endl;
 	}
 	updatedConfig.close();
+}
+
+void ConfigManager::SetInt(std::string key, int value)
+{
+	SetString(key, std::to_string(value));
+}
+
+void ConfigManager::SetBoolean(std::string key, bool value)
+{
+	SetString(key, std::to_string(value));
 }
 
 std::string ConfigManager::GetString(std::string key)

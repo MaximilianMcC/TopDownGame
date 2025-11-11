@@ -17,7 +17,7 @@ int main()
 	Utils::Init(&window);
 
 	AssetManager::LoadDefaultFont("arial", "ARIAL");
-	Level::Load("./assets/levels/1.txt");
+	Level::Load(ConfigManager::GetString("level"));
 
 	// Zoom in the camera a little
 	Utils::Camera.zoom(1.0f / 3.0f);
