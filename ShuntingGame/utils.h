@@ -29,8 +29,6 @@ public:
 	static bool StringEndsWith(std::string string, std::string ending);
 	static void ReplaceAll(std::string& string, std::string thing, std::string with);
 
-	static sf::Vector2f GetMousePosition();
-
 	static sf::Angle AngleFromVector(sf::Vector2f direction);
 	static sf::Vector2f VectorFromAngle(sf::Angle angle);
 

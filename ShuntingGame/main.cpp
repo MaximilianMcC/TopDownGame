@@ -3,6 +3,7 @@
 #include "assetManager.h"
 #include "level.h"
 #include "configManager.h"
+#include "inputHandler.h"
 
 int main()
 {
@@ -26,7 +27,9 @@ int main()
 	while (window.isOpen())
 	{
 		// Calculate and update delta time
+		// and update the inputs
 		Utils::DeltaTime = deltaTimeClock.restart().asSeconds();
+		InputHandler::CaptureInputs();
 
 		// Check for any events
 		while (const std::optional event = window.pollEvent())

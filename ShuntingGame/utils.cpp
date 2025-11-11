@@ -85,11 +85,6 @@ void Utils::ReplaceAll(std::string& string, std::string thing, std::string with)
 	}
 }
 
-sf::Vector2f Utils::GetMousePosition()
-{
-	return window->mapPixelToCoords(sf::Mouse::getPosition(*window));
-}
-
 sf::Angle Utils::AngleFromVector(sf::Vector2f direction)
 {
 	return sf::radians(std::atan2(direction.y, direction.x));
