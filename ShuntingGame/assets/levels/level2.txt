@@ -1,0 +1,4 @@
+6,6,Level 2,./assets/levels/level1.txt
+{}
+{u2}{}{}{s2}
+{}{u2k}{}{}

@@ -13,6 +13,7 @@ public:
 	static std::vector<Block*> Blocks;
 	static int Width;
 	static int Height;
+	static std::string NextLevelPath;
 	
 	// TODO: Use a definition for this instead
 	const static int BlockSize;

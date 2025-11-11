@@ -13,6 +13,7 @@ int Level::Width = 0;
 int Level::Height = 0;
 std::string Level::Name = "unknown";
 const int Level::BlockSize = 16;
+std::string Level::NextLevelPath;
 
 sf::RectangleShape Level::Border;
 sf::Text* Level::levelNameText = nullptr;
@@ -46,6 +47,7 @@ void Level::Load(std::string path)
 			Width = std::stoi(data[0]);
 			Height = std::stoi(data[1]);
 			Name = data[2];
+			NextLevelPath = data[3];
 
 			gotHeader = true;
 			continue;
@@ -90,7 +92,8 @@ void Level::Load(std::string path)
 			position.x++;
 		}
 
-		// Increase the X for the next row of blocks
+		// Move onto the next row thingy
+		position.x = 0.0f;
 		position.y++;
 	}
 	file.close();
