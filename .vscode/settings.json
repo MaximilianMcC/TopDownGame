@@ -35,6 +35,8 @@
 		"optional": "cpp",
 		"memory": "cpp",
 		"xtree": "cpp",
-		"cmath": "cpp"
+		"cmath": "cpp",
+		"iosfwd": "cpp",
+		"filesystem": "cpp"
 	}
 }

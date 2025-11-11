@@ -95,7 +95,6 @@ void Level::Load(std::string path)
 	file.close();
 
 	// Make the fancy border based on the size of the thing
-	// TODO: DO COLLISION FOR THIS BY CHECKING FOR IF IT IS COLLIDING AND IF ITS NOT THEN DONT LET THEM MOVE YK
 	Border = sf::RectangleShape(sf::Vector2f((float)Width, (float)Height) * (float)BlockSize);
 	Border.setOutlineThickness(5.0f);
 	Border.setOutlineColor(sf::Color::White);

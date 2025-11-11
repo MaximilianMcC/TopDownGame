@@ -2,12 +2,16 @@
 #include "utils.h"
 #include "assetManager.h"
 #include "level.h"
+#include "configManager.h"
 
 int main()
 {
 	// SFML setup
 	sf::RenderWindow window(sf::VideoMode({ 640, 480 }), "graphics and oop do not mix");
 	sf::Clock deltaTimeClock = sf::Clock();
+
+	// Config setup
+	ConfigManager::Init();
 
 	// Share the window so we can draw and whatnot
 	Utils::Init(&window);
