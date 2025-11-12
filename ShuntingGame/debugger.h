@@ -6,6 +6,7 @@ class Debugger
 {
 private:
 	static sf::Text* text;
+	static sf::RectangleShape background;
 
 public:
 	static bool Enabled;

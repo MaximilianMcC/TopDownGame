@@ -8,13 +8,19 @@
 
 bool Debugger::Enabled = false;
 sf::Text* Debugger::text = nullptr;
+sf::RectangleShape Debugger::background;
 
 void Debugger::Start()
 {
 	// Make the text stuff
-	text = new sf::Text(*AssetManager::GetFont("consolas"), "", 10U);
-	text->setFillColor(sf::Color::Black);
+	text = new sf::Text(*AssetManager::GetFont("consolas"), "erhm", 10U);
+	text->setFillColor(sf::Color::White);
 	text->setPosition(sf::Vector2f(-50.0f, -50.0f));
+
+	// Make the background
+	background = sf::RectangleShape(sf::Vector2f(500, 500));
+	background.setPosition(sf::Vector2f(-64.0f, -64.0f));
+	background.setFillColor(sf::Color(0x00000080));
 }
 
 void Debugger::Update()
@@ -44,6 +50,7 @@ void Debugger::Draw()
 {
 	if (Enabled == false) return;
 
+	Utils::GetWindow()->draw(background);
 	Utils::GetWindow()->draw(*text);
 }
 
