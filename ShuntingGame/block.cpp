@@ -3,6 +3,20 @@
 #include "numericalVectors.h"
 #include "inputHandler.h"
 #include "level.h"
+#include "assetManager.h"
+
+// Load all the textures and whatnot
+void Block::Load()
+{
+	AssetManager::LoadTexture("block_2_up", "./assets/blocks/2_up.png");
+	AssetManager::LoadTexture("block_3_up", "./assets/blocks/3_up.png");
+
+	AssetManager::LoadTexture("block_2_side", "./assets/blocks/2_side.png");
+	AssetManager::LoadTexture("block_3_side", "./assets/blocks/3_side.png");
+
+	AssetManager::LoadTexture("key_2_side", "./assets/blocks/2_side_key.png");
+	AssetManager::LoadTexture("key_2_up", "./assets/blocks/2_up_key.png");
+}
 
 Block::Block(sf::Vector2f position, int size, Direction movementDirection, bool key)
 {
@@ -18,11 +32,10 @@ Block::Block(sf::Vector2f position, int size, Direction movementDirection, bool 
 	shape.setPosition(position);
 
 	// Make it look nice
-	// TODO: Use textures
-	shape.setFillColor(Utils::GetRandomColor());
-
-	// If its the key then give it the special apperance
-	if (isKey) shape.setFillColor(sf::Color::Red);
+	std::string textureKey = isKey ? "key" : "block";
+	textureKey += "_" + std::to_string(size) + "_";
+	textureKey += (direction == SIDE_TO_SIDE) ? "side" : "up";
+	shape.setTexture(AssetManager::GetTexture(textureKey));
 }
 
 void Block::Update()

@@ -8,10 +8,11 @@
 int main()
 {
 	// SFML setup
-	sf::RenderWindow window(sf::VideoMode({ 640, 480 }), "graphics and oop do not mix");
+	sf::RenderWindow window(sf::VideoMode({ 480, 480 }), "having a think rn (puzzle game)");
 	sf::Clock deltaTimeClock = sf::Clock();
 
 	// Load random assets
+	Block::Load();
 	AssetManager::LoadDefaultFont("arial", "ARIAL");
 	AssetManager::LoadDefaultFont("consolas", "consola");
 
@@ -24,7 +25,7 @@ int main()
 	Level::Load(ConfigManager::GetString("level"));
 
 	// Zoom in the camera a little
-	Utils::Camera.zoom(1.0f / 3.0f);
+	Utils::Camera.zoom(1.0f / 5.0f);
 
 	// Game window
 	while (window.isOpen())

@@ -100,14 +100,14 @@ void Level::Load(std::string path)
 
 	// Make the fancy border based on the size of the thing
 	Border = sf::RectangleShape(sf::Vector2f((float)Width, (float)Height) * (float)BlockSize);
-	Border.setOutlineThickness(5.0f);
+	Border.setOutlineThickness(2.0f);
 	Border.setOutlineColor(sf::Color::White);
 	Border.setFillColor(sf::Color::Transparent);
 
 	// Set the text
-	levelNameText = new sf::Text(*AssetManager::GetFont("arial"), Name, 40U);
+	levelNameText = new sf::Text(*AssetManager::GetFont("arial"), Name, 20U);
 	levelNameText->setOrigin(levelNameText->getLocalBounds().size / 2.0f);
-	levelNameText->setPosition(Border.getGeometricCenter() * sf::Vector2f(1.0f, -1.5f));
+	levelNameText->setPosition(Border.getGlobalBounds().getCenter() * sf::Vector2f(1.0f, -0.8f));
 
 	// Centre the camera on the level
 	Utils::Camera.setCenter(Border.getGeometricCenter());

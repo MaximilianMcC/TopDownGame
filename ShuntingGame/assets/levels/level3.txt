@@ -1,0 +1,6 @@
+6,6,Level 3,./assets/levels/level3.txt
+{}{}{}{u3}
+{}
+{s2k}
+{u3}
+{}{}{}{s3}

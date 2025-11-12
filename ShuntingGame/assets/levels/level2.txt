@@ -1,4 +1,7 @@
-6,6,Level 2,./assets/levels/level1.txt
-{}
-{u2}{}{}{s2}
-{}{u2k}{}{}
+6,6,Level 2,./assets/levels/level3.txt
+{s3}{}{}{u2}{}{u2}
+{s2}{}{u2}{}{}{}
+{u2}{}{}{s2k}{}{u2}
+{}{u2}{}{}{}{}
+{}{}{s2}{}{s2}{}
+{s2}

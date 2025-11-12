@@ -27,6 +27,7 @@ void Debugger::Update()
 	if (InputHandler::KeyPressed(sf::Keyboard::Key::V)) Utils::UseVsync(!Utils::VsyncOn());
 
 	// Updaet the text
+	// TODO: think of more debug things to add
 	std::string vsyncStatus = "(" + std::string(Utils::VsyncOn() ? "on" : "off") + ")";
 	text->setString("Press S to skip level\nPress v to toggle vsync " + vsyncStatus);
 }
