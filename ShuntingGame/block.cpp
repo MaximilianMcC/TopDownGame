@@ -15,7 +15,7 @@ void Block::Load()
 	AssetManager::LoadTexture("block_3_side", "./assets/blocks/3_side.png");
 
 	AssetManager::LoadTexture("key_2_side", "./assets/blocks/2_side_key.png");
-	AssetManager::LoadTexture("key_2_up", "./assets/blocks/2_up_key.png");
+	// AssetManager::LoadTexture("key_2_up", "./assets/blocks/2_up_key.png");
 }
 
 Block::Block(sf::Vector2f position, int size, Direction movementDirection, bool key)
@@ -99,10 +99,15 @@ void Block::Move()
 				float minX = border.position.x;
 				float maxX = border.position.x + border.size.x - width;
 
-				// make sure we can't go outside the bounds
-				targetPosition.x = std::clamp(targetPosition.x, minX, maxX);
-				targetBounds.position.x = targetPosition.x;
-			} else
+				// Just kinda don't do right collision for the key
+				if ((isKey && targetPosition.x >= maxX) == false)
+				{
+					// make sure we can't go outside the bounds
+					targetPosition.x = std::clamp(targetPosition.x, minX, maxX);
+					targetBounds.position.x = targetPosition.x;
+				}
+			}
+			else
 			{
 				// Get how much we're allowed to move
 				float minY = border.position.y;
@@ -124,7 +129,7 @@ void Block::Move()
 				float allowedX = targetPosition.x;
 				
 				float currentLeft = currentPosition.x;
-        		float currentRight = currentPosition.x + width;
+				float currentRight = currentPosition.x + width;
 
 				// Loop over all blocks
 				for (Block* other : Level::Blocks)
@@ -134,11 +139,11 @@ void Block::Move()
 
 					// Check for if we collide
 					sf::FloatRect otherBounds = other->shape.getGlobalBounds();
-            		if (OverlapsOnY(targetBounds, otherBounds) == false) continue;
+					if (OverlapsOnY(targetBounds, otherBounds) == false) continue;
 
 					// Figure out where we're allowed to go
 					float otherLeft = otherBounds.position.x;
-            		float otherRight = otherBounds.position.x + otherBounds.size.x;
+					float otherRight = otherBounds.position.x + otherBounds.size.x;
 
 					// If we're 'overflowing' then adjust
 					if (movingRight)
@@ -162,10 +167,10 @@ void Block::Move()
 			{
 				// Y collision
 				bool movingDown = targetPosition.y > currentPosition.y;
-        		float allowedY = targetPosition.y;
+				float allowedY = targetPosition.y;
 
-        		float currentTop = currentPosition.y;
-        		float currentBottom = currentPosition.y + height;
+				float currentTop = currentPosition.y;
+				float currentBottom = currentPosition.y + height;
 				
 				// Loop over all blocks
 				for (Block* other : Level::Blocks) {
@@ -217,27 +222,27 @@ void Block::Draw()
 bool Block::OverlapsOnY(const sf::FloatRect& a, const sf::FloatRect& b)
 {
 	// Handle A
-    const float aTop = a.position.y;
-    const float aBottom = a.position.y + a.size.y;
+	const float aTop = a.position.y;
+	const float aBottom = a.position.y + a.size.y;
 
 	// Handle B
-    const float bTop = b.position.y;
-    const float bBottom = b.position.y + b.size.y;
+	const float bTop = b.position.y;
+	const float bBottom = b.position.y + b.size.y;
 
 	// Do the actual check
-    return (aTop < bBottom) && (aBottom > bTop);
+	return (aTop < bBottom) && (aBottom > bTop);
 }
 
 bool Block::OverlapsOnX(const sf::FloatRect& a, const sf::FloatRect& b)
 {
 	// Handle A
-    const float aLeft = a.position.x;
-    const float aRight = a.position.x + a.size.x;
+	const float aLeft = a.position.x;
+	const float aRight = a.position.x + a.size.x;
 
 	// Handle B
-    const float bLeft = b.position.x;
-    const float bRight = b.position.x + b.size.x;
+	const float bLeft = b.position.x;
+	const float bRight = b.position.x + b.size.x;
 
 	// Do the actual check
-    return (aLeft < bRight) && (aRight > bLeft);
+	return (aLeft < bRight) && (aRight > bLeft);
 }
