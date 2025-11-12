@@ -9,7 +9,7 @@ class Level
 {
 private:
 	static sf::Text* levelNameText;
-public:
+	public:
 	static std::vector<Block*> Blocks;
 	static int Width;
 	static int Height;
@@ -18,6 +18,7 @@ public:
 	// TODO: Use a definition for this instead
 	const static int BlockSize;
 	
+	static sf::FloatRect EndLevelTrigger;
 	static sf::RectangleShape Border;
 	static std::string Name;
 public:	

@@ -17,6 +17,7 @@ std::string Level::NextLevelPath;
 
 sf::RectangleShape Level::Border;
 sf::Text* Level::levelNameText = nullptr;
+sf::FloatRect Level::EndLevelTrigger;
 
 void Level::Load(std::string path)
 {
@@ -103,6 +104,11 @@ void Level::Load(std::string path)
 	Border.setOutlineThickness(2.0f);
 	Border.setOutlineColor(sf::Color::White);
 	Border.setFillColor(sf::Color::Transparent);
+
+	// Make the end level trigger (on the right)
+	EndLevelTrigger = sf::FloatRect();
+	EndLevelTrigger.position = Border.getPosition() + sf::Vector2f(Border.getSize().x + (BlockSize * 1.5), 0);
+	EndLevelTrigger.size = Border.getSize();
 
 	// Set the text
 	levelNameText = new sf::Text(*AssetManager::GetFont("arial"), Name, 20U);

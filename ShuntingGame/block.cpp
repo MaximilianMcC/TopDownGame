@@ -209,6 +209,12 @@ void Block::Move()
 			// both the X/Y things
 			shape.setPosition(targetPosition);
 		}
+	
+		// Check for if we won
+		if (Level::EndLevelTrigger.findIntersection(shape.getGlobalBounds()))
+		{
+			Level::GotoNextLevel();
+		}
 	}
 }
 
