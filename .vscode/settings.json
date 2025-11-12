@@ -38,6 +38,8 @@
 		"cmath": "cpp",
 		"iosfwd": "cpp",
 		"filesystem": "cpp",
-		"unordered_map": "cpp"
+		"unordered_map": "cpp",
+		"fstream": "cpp",
+		"chrono": "cpp"
 	}
 }
