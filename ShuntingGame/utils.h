@@ -9,6 +9,7 @@ class Utils
 private:
 	static sf::RenderWindow* window;
 	static bool vsync;
+	static float masterVolume;
 	
 public:
 	static float DeltaTime;
@@ -24,6 +25,10 @@ public:
 	static sf::RenderWindow* GetWindow() { return window; }
 	static void UseVsync(bool state);
 	static bool VsyncOn();
+
+	static void SetMasterVolume(float newMasterVolume);
+	static void AddToMasterVolume(float change);
+	static float GetMasterVolume();
 
 	static std::vector<std::string> Split(std::string string, std::string delimiter);
 	static bool StringEndsWith(std::string string, std::string ending);

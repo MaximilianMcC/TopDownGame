@@ -5,6 +5,7 @@
 // Register private static stuff
 sf::RenderWindow* Utils::window;
 bool Utils::vsync;
+float Utils::masterVolume = 50.0f;
 
 // Register public static stuff
 float Utils::DeltaTime;
@@ -20,6 +21,23 @@ void Utils::UseVsync(bool state)
 bool Utils::VsyncOn()
 {
 	return vsync;
+}
+
+void Utils::SetMasterVolume(float newMasterVolume)
+{
+	// Ensure the volume is between 0 and 100
+	masterVolume = std::clamp(newMasterVolume, 0.0f, 100.0f);
+	ConfigManager::SetFloat("volume", masterVolume);
+}
+
+void Utils::AddToMasterVolume(float change)
+{
+	SetMasterVolume(masterVolume + change);
+}
+
+float Utils::GetMasterVolume()
+{
+	return masterVolume;
 }
 
 std::vector<std::string> Utils::Split(std::string string, std::string delimiter)

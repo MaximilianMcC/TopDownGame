@@ -26,13 +26,12 @@ void ConfigManager::Init()
 	if (std::filesystem::exists(configFilePath) == false)
 	{
 		SetString("level", "./assets/levels/level1.txt");
+
 		SetBoolean("vsync", false);
 		SetInt("windowX", (int)Utils::GetWindow()->getSize().x);
 		SetInt("windowY", (int)Utils::GetWindow()->getSize().y);
 
-		// TODO: Add volume
-		// TODO: Add a float datatype (or just `* 100` or whatever)
-		// Set("volume", 30);
+		SetFloat("volume", Utils::GetMasterVolume());
 	}
 	else
 	{
@@ -42,6 +41,8 @@ void ConfigManager::Init()
 			(unsigned int)GetInt("windowY")
 		));
 		Utils::UseVsync(GetBoolean("vsync"));
+
+		Utils::SetMasterVolume(GetFloat("volume"));
 	}
 }
 
@@ -96,6 +97,11 @@ void ConfigManager::SetInt(std::string key, int value)
 	SetString(key, std::to_string(value));
 }
 
+void ConfigManager::SetFloat(std::string key, float value)
+{
+	SetString(key, std::to_string(value));
+}
+
 void ConfigManager::SetBoolean(std::string key, bool value)
 {
 	SetString(key, std::to_string(value));
@@ -135,6 +141,11 @@ std::string ConfigManager::GetString(std::string key)
 int ConfigManager::GetInt(std::string key)
 {
 	return std::stoi(GetString(key));
+}
+
+float ConfigManager::GetFloat(std::string key)
+{
+	return std::stof(GetString(key));
 }
 
 bool ConfigManager::GetBoolean(std::string key)

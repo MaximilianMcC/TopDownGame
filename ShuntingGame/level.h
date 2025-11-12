@@ -28,4 +28,5 @@ public:
 	static void Unload();
 
 	static void GotoNextLevel();
+	static void Restart();
 };

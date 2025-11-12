@@ -11,15 +11,16 @@ int main()
 	sf::RenderWindow window(sf::VideoMode({ 480, 480 }), "having a think rn (puzzle game)");
 	sf::Clock deltaTimeClock = sf::Clock();
 
+	// load all the settings
+	Utils::Init(&window);
+	ConfigManager::Init();
+
 	// Load random assets
 	AssetManager::LoadDefaultFont("arial", "ARIAL");
 	AssetManager::LoadDefaultFont("consolas", "consola");
 	AssetManager::LoadSound("level_complete", "./assets/sounds/ding.wav");
 	Block::Load();
 
-	// Window kinda setup
-	Utils::Init(&window);
-	ConfigManager::Init();
 	Debugger::Start();
 
 	// Load the level

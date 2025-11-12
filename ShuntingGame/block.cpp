@@ -20,6 +20,7 @@ void Block::Load()
 	// AssetManager::LoadTexture("key_2_up", "./assets/blocks/2_up_key.png");
 
 	levelCompleteSound = new sf::Sound(*AssetManager::GetSound("level_complete"));
+	levelCompleteSound->setVolume(Utils::GetMasterVolume());
 }
 
 void Block::UnLoad()

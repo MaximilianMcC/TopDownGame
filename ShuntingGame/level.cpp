@@ -160,3 +160,8 @@ void Level::GotoNextLevel()
 {
 	Load(Level::NextLevelPath);
 }
+
+void Level::Restart()
+{
+	Load(ConfigManager::GetString("level"));
+}
