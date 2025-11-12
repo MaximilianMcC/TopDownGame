@@ -12,9 +12,10 @@ int main()
 	sf::Clock deltaTimeClock = sf::Clock();
 
 	// Load random assets
-	Block::Load();
 	AssetManager::LoadDefaultFont("arial", "ARIAL");
 	AssetManager::LoadDefaultFont("consolas", "consola");
+	AssetManager::LoadSound("level_complete", "./assets/sounds/ding.wav");
+	Block::Load();
 
 	// Window kinda setup
 	Utils::Init(&window);
@@ -54,7 +55,7 @@ int main()
 		Level::Update();
 		
 		// Draw
-		window.clear(sf::Color(0x778396));
+		window.clear(sf::Color(0x5a3818FF));
 		window.setView(Utils::Camera);
 		Level::Draw();
 		Debugger::Draw();

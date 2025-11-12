@@ -178,6 +178,18 @@ sf::SoundBuffer* AssetManager::LoadSound(std::string key, std::string path)
 	return &sounds[key];
 }
 
+sf::SoundBuffer *AssetManager::GetSound(std::string key)
+{
+	// Check for if the key exists or not
+	if (sounds.find(key) == sounds.end())
+	{
+		std::cerr << "No sounds with the key '" << key << "' exists\n";
+		return nullptr;
+	}
+
+	return &sounds[key];
+}
+
 sf::Texture* AssetManager::LoadTextureFromRenderTexture(std::string key, sf::RenderTexture &renderTexture)
 {
 	// Check for if the key exists or not

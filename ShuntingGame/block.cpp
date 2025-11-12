@@ -5,6 +5,8 @@
 #include "level.h"
 #include "assetManager.h"
 
+sf::Sound* Block::levelCompleteSound = nullptr;
+
 // Load all the textures and whatnot
 void Block::Load()
 {
@@ -16,6 +18,14 @@ void Block::Load()
 
 	AssetManager::LoadTexture("key_2_side", "./assets/blocks/2_side_key.png");
 	// AssetManager::LoadTexture("key_2_up", "./assets/blocks/2_up_key.png");
+
+	levelCompleteSound = new sf::Sound(*AssetManager::GetSound("level_complete"));
+}
+
+void Block::UnLoad()
+{
+	delete levelCompleteSound;
+	levelCompleteSound = nullptr;
 }
 
 Block::Block(sf::Vector2f position, int size, Direction movementDirection, bool key)
@@ -214,6 +224,7 @@ void Block::Move()
 		if (Level::EndLevelTrigger.findIntersection(shape.getGlobalBounds()))
 		{
 			Level::GotoNextLevel();
+			levelCompleteSound->play();
 		}
 	}
 }
